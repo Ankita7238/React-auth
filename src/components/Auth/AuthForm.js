@@ -1,9 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useContext } from 'react';
 
 import classes from './AuthForm.module.css';
+import AuthContext from '../../store/auth-context';
 
 const AuthForm = () => 
   {
+  const authctx=useContext(AuthContext)
   const [isLogin, setIsLogin] = useState(true);
   const [Loader, setLoader] = useState(false);
   const emailref= useRef()
@@ -40,7 +42,9 @@ const AuthForm = () =>
       {
         setLoader(false)
         isLogin? console.log('signin done'):console.log('signup done')
-        res.json().then(data=>{console.log(data.idToken)})
+        res.json().then(data=>{console.log(data.idToken)
+          authctx.login(data.idToken)
+        })
       }
       else{
         setLoader(false)
