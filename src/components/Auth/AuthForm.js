@@ -1,10 +1,11 @@
 import { useState, useRef, useContext } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import classes from './AuthForm.module.css';
 import AuthContext from '../../store/auth-context';
 
 const AuthForm = () => 
   {
+    const navigate= useNavigate()
   const authctx=useContext(AuthContext)
   const [isLogin, setIsLogin] = useState(true);
   const [Loader, setLoader] = useState(false);
@@ -44,6 +45,7 @@ const AuthForm = () =>
         isLogin? console.log('signin done'):console.log('signup done')
         res.json().then(data=>{console.log(data.idToken)
           authctx.login(data.idToken)
+          navigate('/')
         })
       }
       else{
