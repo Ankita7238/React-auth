@@ -9,7 +9,7 @@ const MainNavigation = () => {
   const isLoggedIn=authctx.isLoggedIn
   const handlelogout=()=>{
     authctx.logout()
-    navigate('/')
+    navigate('/auth')
   }
   return (
     <header className={classes.header}>
